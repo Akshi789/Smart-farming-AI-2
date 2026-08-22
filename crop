@@ -1,0 +1,44 @@
+# ==============================================================================
+#                      AKSHI SMART FARMING AI PLATFORM
+#            Agricultural Intelligence, Crop AI & IoT Telemetry
+# ==============================================================================
+
+Welcome to the Akshi Smart Farming AI Project!
+
+This production-ready system is developed for precision agriculture and decision support:
+
+1. 📊 Executive Overview & IoT Farm Live Dashboard
+   - Real-time simulated telemetry: Soil Moisture, Soil Temp, Ambient Temp, Humidity, Solar Irradiance, Water Flow.
+   - Closed-loop automated solenoid valve irrigation logic with manual override.
+
+2. 🌱 AI Crop Recommendation Engine
+   - Multi-factor Euclidean & Cosine distance scoring across 7 critical agronomic parameters (N, P, K, pH, Temp, Humidity, Rainfall).
+   - Instant suitability scoring and top-3 crop comparison with expected yield and mandi pricing.
+
+3. 🔬 Plant Pathology & Leaf Disease Vision AI
+   - Drag-and-drop / camera leaf scanner with laser scanning animation and bounding-box lesion localization.
+   - Diagnosis reports with pathogens, organic biocontrol remedies, and chemical treatments.
+
+4. 📡 Real-Time IoT Sensor Telemetry & Auto-Irrigation
+   - 3-second live sensor loop with Chart.js time-series graphs.
+
+5. 🌦️ Agro-Weather & Smart Evapotranspiration (ET₀) Advisory
+   - 7-day microclimate forecast, daily Penman-Monteith ET₀ calculations, and chemical spray safety windows.
+
+6. 🧪 Soil Health & Fertilizer Dosage Calculator
+   - Exact commercial fertilizer dosage (Urea, DAP, MOP) calculation in kg and 50kg bags.
+
+7. 📈 Mandi Market Trends & Profit Planner
+   - Project gross revenue, cultivation costs, net profits, and ROI %.
+
+8. 🤖 Akshi AI Virtual Agronomist Assistant
+   - 24/7 intelligent agricultural chatbot with NLP intent matching and voice speech output.
+
+------------------------------------------------------------------------------
+QUICKSTART INSTRUCTIONS:
+------------------------------------------------------------------------------
+Option A: Open 'index.html' in your browser (Chrome / Edge / Firefox)
+Option B: Run the Python REST backend:
+          python python/server.py
+          Then open: http://localhost:8000
+==============================================================================

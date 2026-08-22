@@ -1,0 +1,230 @@
+{
+  "diseases": [
+    {
+      "id": "tomato_early_blight",
+      "name": "Tomato Early Blight",
+      "pathogen": "Alternaria solani (Fungus)",
+      "affected_crops": ["Tomato", "Potato", "Eggplant"],
+      "severity": "Moderate to High",
+      "symptoms": [
+        "Concentric brown-to-black target-like ring spots on older leaves",
+        "Yellowing halo surrounding brown spots",
+        "Premature defoliation starting from the lower canopy",
+        "Dark sunken lesions at the base of the stem"
+      ],
+      "causes": "Warm temperatures (24-29°C) combined with prolonged leaf wetness or high humidity.",
+      "organic_remedies": [
+        "Spray Neem oil (5ml/L) or copper octanoate every 7-10 days",
+        "Apply bio-fungicide containing Bacillus subtilis or Trichoderma viride",
+        "Prune bottom leaves (lower 30cm) to reduce soil splash"
+      ],
+      "chemical_treatments": [
+        "Spray Mancozeb 75% WP @ 2.5g/L water",
+        "Azoxystrobin 23% SC @ 1ml/L or Chlorothalonil 75% WP @ 2g/L"
+      ],
+      "prevention": [
+        "Maintain 2-3 year crop rotation away from solanaceous crops",
+        "Use drip irrigation to avoid wet foliage",
+        "Mulch around plant base with organic straw"
+      ],
+      "confidence_boost_keywords": ["brown rings", "concentric spots", "lower leaf yellowing", "target spot"]
+    },
+    {
+      "id": "tomato_late_blight",
+      "name": "Late Blight",
+      "pathogen": "Phytophthora infestans (Oomycete)",
+      "affected_crops": ["Tomato", "Potato"],
+      "severity": "Critical / High Risk",
+      "symptoms": [
+        "Water-soaked dark greasy spots that enlarge rapidly",
+        "White fluffy fungal downy growth on leaf undersides in high humidity",
+        "Rapid collapse and browning of leaves and stems",
+        "Hard dark brown greasy patches on green and ripe fruits"
+      ],
+      "causes": "Cool, humid weather (15-20°C with >90% humidity or continuous rain).",
+      "organic_remedies": [
+        "Immediate foliar spray of Copper Oxychloride (Bordeaux mixture 1%)",
+        "Remove and safely incinerate heavily infected foliage immediately",
+        "Apply Trichoderma harzianum soil and spray treatment"
+      ],
+      "chemical_treatments": [
+        "Metalaxyl 8% + Mancozeb 64% WP (Ridomil MZ) @ 2.5g/L water",
+        "Cymoxanil 8% + Mancozeb 64% WP @ 2g/L"
+      ],
+      "prevention": [
+        "Plant resistant cultivars (e.g., Mountain Magic, Plum Regal)",
+        "Provide wide plant spacing for rapid air drying",
+        "Destroy cull piles and volunteer potato sprouts"
+      ],
+      "confidence_boost_keywords": ["water-soaked", "white mold underside", "greasy spots", "rapid leaf rot"]
+    },
+    {
+      "id": "rice_blast",
+      "name": "Rice Blast",
+      "pathogen": "Magnaporthe oryzae (Fungus)",
+      "affected_crops": ["Rice (Paddy)"],
+      "severity": "Severe",
+      "symptoms": [
+        "Spindle or diamond-shaped lesions with gray/whitish centers and dark brown borders",
+        "Lesions coalesce causing complete leaf blast and drying",
+        "Neck blast turning black and causing lodging / empty panicles",
+        "Node blast causing culm breakage"
+      ],
+      "causes": "Excessive nitrogen fertilizer, high relative humidity (>93%), and night temperatures of 20-24°C.",
+      "organic_remedies": [
+        "Pseudomonas fluorescens seed treatment @ 10g/kg and foliar spray @ 2.5g/L",
+        "Neem seed kernel extract (NSKE 5%) spray at tillering and boot leaf stage"
+      ],
+      "chemical_treatments": [
+        "Tricyclazole 75% WP @ 0.6g/L water (Beam / Trooper)",
+        "Isoprothiolane 40% EC @ 1.5ml/L or Kasugamycin 3% SL @ 2ml/L"
+      ],
+      "prevention": [
+        "Avoid excess basal or top-dressed Nitrogen; split into 3-4 doses",
+        "Maintain proper water depth without excessive drainage stress",
+        "Use certified blast-resistant seed varieties"
+      ],
+      "confidence_boost_keywords": ["diamond shape", "spindle lesion", "gray center brown margin", "neck blast"]
+    },
+    {
+      "id": "corn_common_rust",
+      "name": "Corn Common Rust",
+      "pathogen": "Puccinia sorghi (Fungus)",
+      "affected_crops": ["Maize (Corn)", "Sweet Corn"],
+      "severity": "Moderate",
+      "symptoms": [
+        "Small, circular to elongated golden-brown to cinnamon-brown pustules",
+        "Pustules appear on both upper and lower leaf surfaces",
+        "Pustules rupture epidermal tissue releasing powdery spores",
+        "Severe infection leads to leaf chlorosis and premature senescence"
+      ],
+      "causes": "Moderate temperatures (16-25°C) with high relative humidity and dew periods of 6+ hours.",
+      "organic_remedies": [
+        "Foliar sulfur dust or wettable sulfur (3g/L)",
+        "Potassium silicate application to strengthen leaf cuticle"
+      ],
+      "chemical_treatments": [
+        "Propiconazole 25% EC (Tilt) @ 1ml/L water",
+        "Azoxystrobin + Difenoconazole @ 1ml/L"
+      ],
+      "prevention": [
+        "Plant rust-tolerant hybrid seeds with Rp resistance genes",
+        "Early planting to avoid high spore load mid-season",
+        "Eradicate Oxalis weed species which act as alternative hosts"
+      ],
+      "confidence_boost_keywords": ["cinnamon pustules", "powdery brown spots", "rust spores", "corn leaf dust"]
+    },
+    {
+      "id": "apple_scab",
+      "name": "Apple Scab",
+      "pathogen": "Venturia inaequalis (Fungus)",
+      "affected_crops": ["Apple", "Pear"],
+      "severity": "High Economic Impact",
+      "symptoms": [
+        "Olive-green to dull dark brown velvety spots on young leaves",
+        "Leaves become crinkled, distorted, and drop early",
+        "Cork-like scabby brown lesions on developing fruit",
+        "Fruit cracking and stunted growth"
+      ],
+      "causes": "Prolonged wet canopy during green tip to petal fall stage (spring rains).",
+      "organic_remedies": [
+        "Lime sulfur spray during dormant and green tip stages",
+        "Serenade (Bacillus subtilis) biofungicide spray during bloom",
+        "Rake and compost/burn fallen orchard leaves in autumn"
+      ],
+      "chemical_treatments": [
+        "Difenoconazole 25% EC (Score) @ 0.5ml/L water",
+        "Captan 50% WP @ 2.5g/L or Dodine 65% WP @ 1g/L"
+      ],
+      "prevention": [
+        "Prune tree canopy for open sunlight penetration and rapid air circulation",
+        "Apply 5% urea spray on fallen leaves in autumn to accelerate leaf decomposition",
+        "Choose scab-resistant varieties like Enterprise, Liberty, or Honeycrisp"
+      ],
+      "confidence_boost_keywords": ["olive velvety spots", "corky fruit scab", "distorted leaves", "apple brown lesions"]
+    },
+    {
+      "id": "cotton_bacterial_blight",
+      "name": "Cotton Bacterial Blight / Angular Leaf Spot",
+      "pathogen": "Xanthomonas citri pv. malvacearum (Bacteria)",
+      "affected_crops": ["Cotton"],
+      "severity": "Moderate to High",
+      "symptoms": [
+        "Water-soaked angular spots bounded by leaf veinlets",
+        "Lesions turn reddish-brown to dark black (Blackarm stage)",
+        "Girdling lesions on stems causing branch breakage",
+        "Boll rot with sunken oily black spots staining lint"
+      ],
+      "causes": "Warm humid conditions (25-32°C) spread via wind-driven rain and infected seeds.",
+      "organic_remedies": [
+        "Seed treatment with hot water (52°C for 10 min) or Pseudomonas fluorescens",
+        "Foliar spray of fresh cow dung slurry supernatant (20%) + neem seed extract"
+      ],
+      "chemical_treatments": [
+        "Streptocycline (Streptomycin sulphate + Tetracycline) @ 100ppm (1g in 10L water) mixed with Copper Oxychloride @ 2.5g/L",
+        "Copper Hydroxide 77% WP @ 2g/L"
+      ],
+      "prevention": [
+        "Acid delinting of cotton seeds with concentrated sulfuric acid (100ml/kg)",
+        "Destroy and deep-plow cotton crop residues after harvest",
+        "Adopt wider row spacing to minimize plant-to-plant contact"
+      ],
+      "confidence_boost_keywords": ["angular vein spots", "blackarm", "water-soaked angular", "cotton boll rot"]
+    },
+    {
+      "id": "powdery_mildew",
+      "name": "Powdery Mildew",
+      "pathogen": "Erysiphe / Podosphaera spp. (Fungus)",
+      "affected_crops": ["Grapes", "Cucurbits", "Tomato", "Wheat", "Peas"],
+      "severity": "Moderate",
+      "symptoms": [
+        "Talcum powder-like white or gray fungal patches on upper leaf surfaces",
+        "Leaves curl upwards, turn brittle, and dry out",
+        "Infected young fruits turn russeted or crack open",
+        "Reduced photosynthesis leading to yield loss"
+      ],
+      "causes": "High humidity combined with dry leaf surfaces, shady locations, and mild temps (20-28°C).",
+      "organic_remedies": [
+        "Baking soda spray (5g sodium bicarbonate + 2ml horticultural oil/L water)",
+        "Milk spray (1 part milk : 9 parts water) in full sunlight",
+        "Potassium bicarbonate (0.3%) or Neem oil (0.5%)"
+      ],
+      "chemical_treatments": [
+        "Hexaconazole 5% EC (Contaf) @ 2ml/L water",
+        "Wettable Sulfur 80% WP @ 3g/L or Penconazole 10% EC @ 0.5ml/L"
+      ],
+      "prevention": [
+        "Plant in locations with full sunlight exposure",
+        "Avoid high-nitrogen fertilizers that generate tender susceptible shoots",
+        "Thin foliage to promote airflow"
+      ],
+      "confidence_boost_keywords": ["white powder", "talcum spots", "curling brittle leaves", "dusty white fungal"]
+    },
+    {
+      "id": "healthy_leaf",
+      "name": "Healthy Plant Tissue (No Disease Detected)",
+      "pathogen": "None (Optimum Physiological State)",
+      "affected_crops": ["All Crops"],
+      "severity": "Healthy (Optimal)",
+      "symptoms": [
+        "Uniform rich green color across leaf lamina",
+        "Turgid leaf structure with clear vein patterns and no necrotic lesions",
+        "Absence of chlorotic spots, fungal growth, or insect feeding scars",
+        "Strong cuticle integrity and healthy transpiration rate"
+      ],
+      "causes": "Balanced soil nutrition, optimal moisture, proper sunlight, and integrated pest protection.",
+      "organic_remedies": [
+        "Continue preventive maintenance with seaweed extract / Panchagavya foliar tonic (3%)",
+        "Maintain regular soil health monitoring and balanced drip fertigation"
+      ],
+      "chemical_treatments": [
+        "No chemical intervention required"
+      ],
+      "prevention": [
+        "Keep up regular scouting and clean farm sanitation",
+        "Ensure calibrated drip irrigation matching crop evapotranspiration"
+      ],
+      "confidence_boost_keywords": ["uniform green", "healthy leaf", "vibrant lamina", "clear veins"]
+    }
+  ]
+}

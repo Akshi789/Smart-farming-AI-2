@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Akshi Smart Farming AI Platform - Intelligent Agricultural Decision Support, Crop Recommendation, Plant Disease Vision, and Real-Time IoT Telemetry." />
+  <title>Akshi AgriAI | Smart Farming & Agricultural Intelligence Platform</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Chart.js for Telemetry & Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Core & Component Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- ==========================================
+         SIDEBAR NAVIGATION
+         ========================================== -->
+    <aside class="app-sidebar">
+      <div class="brand-section">
+        <div class="brand-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <div class="brand-text">
+          <h1>AKSHI <span style="font-size:0.85rem; color:var(--accent-emerald-light);">AgriAI</span></h1>
+          <div class="brand-tag">Smart Farming Intelligence</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-label">Core Modules</div>
+        
+        <a class="nav-item active" data-tab="overview">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard Overview</span>
+          <span class="nav-badge">LIVE</span>
+        </a>
+
+        <a class="nav-item" data-tab="cropai">
+          <i class="fas fa-seedling"></i>
+          <span>Crop AI Recommendation</span>
+        </a>
+
+        <a class="nav-item" data-tab="scanner">
+          <i class="fas fa-microscope"></i>
+          <span>Disease Vision Scanner</span>
+        </a>
+
+        <a class="nav-item" data-tab="iot">
+          <i class="fas fa-tower-broadcast"></i>
+          <span>IoT Sensors & Irrigation</span>
+        </a>
+
+        <div class="nav-label" style="margin-top:10px;">Agronomic Analytics</div>
+
+        <a class="nav-item" data-tab="weather">
+          <i class="fas fa-cloud-sun"></i>
+          <span>Agro-Weather & ET₀</span>
+        </a>
+
+        <a class="nav-item" data-tab="fertilizer">
+          <i class="fas fa-flask-vial"></i>
+          <span>Soil Health & Fertilizer</span>
+        </a>
+
+        <a class="nav-item" data-tab="market">
+          <i class="fas fa-chart-line"></i>
+          <span>Mandi Prices & Profit</span>
+        </a>
+
+        <a class="nav-item" data-tab="chat">
+          <i class="fas fa-robot"></i>
+          <span>Akshi AI Agronomist</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="iot-status-card">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span class="pulse-dot"></span>
+            <div>
+              <div style="font-size:0.8rem; font-weight:700; color:var(--text-primary);">IoT Telemetry Gateway</div>
+              <div style="font-size:0.7rem; color:var(--text-dim);">Station: Field #04 (Active)</div>
+            </div>
+          </div>
+          <i class="fas fa-wifi" style="color:var(--accent-emerald-light); font-size:0.85rem;"></i>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         MAIN CONTENT AREA
+         ========================================== -->
+    <main class="app-main">
+      
+      <!-- Top Sticky Header -->
+      <header class="app-header">
+        <div class="header-title-group">
+          <h2 id="pageHeaderTitle">
+            <i class="fas fa-chart-pie" style="color:var(--accent-emerald-light);"></i> Executive Farm Dashboard
+          </h2>
+          <span>Automated Precision Agriculture & Decision Support System</span>
+        </div>
+
+        <div class="header-actions">
+          <div class="quick-pill">
+            <i class="fas fa-location-dot" style="color:var(--accent-emerald-light);"></i>
+            <span>Agri-Zone: Zone 7A</span>
+          </div>
+
+          <button id="voiceToggleBtn" class="btn btn-secondary btn-sm" onclick="window.chatAssistant?.toggleSpeech()">
+            <i class="fas fa-volume-xmark"></i> Voice OFF
+          </button>
+
+          <button class="btn btn-secondary btn-sm" onclick="window.app?.exportFarmReport()" title="Export / Print Farm Report">
+            <i class="fas fa-file-pdf"></i> Export Report
+          </button>
+
+          <button id="themeToggleBtn" class="btn-icon" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dynamic Dashboard Panes -->
+      <div class="dashboard-content">
+        
+        <!-- ==========================================
+             TAB 1: EXECUTIVE OVERVIEW DASHBOARD
+             ========================================== -->
+        <div id="tab-overview" class="tab-pane active">
+          
+          <!-- Key KPI Cards -->
+          <div class="grid-4" style="margin-bottom:24px;">
+            
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-emerald"><i class="fas fa-droplet"></i></div>
+                <span class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> Optimal</span>
+              </div>
+              <div class="stat-value"><span id="sensorMoistureVal">42</span><span class="stat-unit">%</span></div>
+              <div class="stat-label">Soil Moisture Content (Root Zone)</div>
+              <div class="stat-progress-bar">
+                <div id="moistureProgressBar" class="stat-progress-fill" style="width:42%; background:var(--accent-emerald);"></div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-amber"><i class="fas fa-temperature-half"></i></div>
+                <span class="stat-trend trend-stable"><i class="fas fa-minus"></i> Stable</span>
+              </div>
+              <div class="stat-value"><span id="sensorAirTempVal">28.2</span><span class="stat-unit">°C</span></div>
+              <div class="stat-label">Ambient Field Temperature</div>
+              <div class="stat-progress-bar">
+                <div class="stat-progress-fill" style="width:58%; background:var(--accent-amber);"></div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-cyan"><i class="fas fa-wind"></i></div>
+                <span class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> 64%</span>
+              </div>
+              <div class="stat-value"><span id="sensorAirHumidityVal">64</span><span class="stat-unit">%</span></div>
+              <div class="stat-label">Relative Air Humidity</div>
+              <div class="stat-progress-bar">
+                <div id="humidityProgressBar" class="stat-progress-fill" style="width:64%; background:var(--accent-cyan);"></div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-lime"><i class="fas fa-sun"></i></div>
+                <span class="stat-trend trend-up"><i class="fas fa-sun"></i> High</span>
+              </div>
+              <div class="stat-value"><span id="sensorSolarVal">720</span><span class="stat-unit">W/m²</span></div>
+              <div class="stat-label">Solar Irradiance / PAR</div>
+              <div class="stat-progress-bar">
+                <div class="stat-progress-fill" style="width:72%; background:var(--accent-lime);"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Overview Grid (Telemetry Chart + Smart Irrigation Automation) -->
+          <div class="grid-2-1">
+            
+            <div class="farm-card">
+              <div class="farm-card-header">
+                <div>
+                  <div class="card-title"><i class="fas fa-chart-line"></i> Real-Time Telemetry Stream</div>
+                  <div class="card-subtitle">Continuous multi-sensor telemetry stream from Field Gateway</div>
+                </div>
+                <span class="quick-pill"><i class="fas fa-circle-dot" style="color:var(--accent-emerald); font-size:0.6rem;"></i> Live Sync (3s)</span>
+              </div>
+              <div class="chart-container">
+                <canvas id="overviewTelemetryChart"></canvas>
+              </div>
+            </div>
+
+            <div class="farm-card">
+              <div class="farm-card-header">
+                <div>
+                  <div class="card-title"><i class="fas fa-faucet-drip"></i> Smart Irrigation Valve</div>
+                  <div class="card-subtitle">Automated moisture-triggered valve controller</div>
+                </div>
+              </div>
+
+              <div style="background:var(--bg-tertiary); border-radius:var(--radius-md); padding:16px; margin-bottom:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span style="font-size:0.85rem; color:var(--text-dim);">Valve Status</span>
+                  <span id="irrigationStatusText" class="stat-trend trend-stable">VALVE CLOSED (Standby)</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.85rem; color:var(--text-dim);">Flow Rate</span>
+                  <span style="font-family:var(--font-mono); font-weight:700; color:var(--text-primary);"><span id="sensorWaterFlowVal">0.0</span> L/min</span>
+                </div>
+              </div>
+
+              <div class="valve-toggle-box">
+                <div>
+                  <div style="font-weight:700; font-size:0.92rem; color:var(--text-primary);">Manual Valve Override</div>
+                  <div style="font-size:0.78rem; color:var(--text-dim);">Force toggle irrigation solenoid</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="irrigationToggle" onchange="window.iotSimulator?.toggleIrrigation(this.checked, 'Manual irrigation valve switched.')" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div style="margin-top:16px; padding:12px; border-radius:var(--radius-md); background:rgba(16, 185, 129, 0.08); border:1px dashed var(--accent-emerald);">
+                <div style="font-size:0.8rem; color:var(--text-secondary);">
+                  <i class="fas fa-lightbulb" style="color:var(--accent-emerald-light);"></i> 
+                  <strong>AI Irrigation Advisory:</strong> Evapotranspiration is normal. Soil moisture (42%) is adequate for active growth.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Quick Navigation Actions -->
+          <div class="grid-3" style="margin-top:24px;">
+            <div class="farm-card" style="cursor:pointer;" onclick="window.app?.switchTab('cropai')">
+              <div style="display:flex; align-items:center; gap:16px;">
+                <div class="stat-icon icon-emerald"><i class="fas fa-seedling"></i></div>
+                <div>
+                  <div style="font-weight:700; color:var(--text-primary);">AI Crop Recommendation</div>
+                  <div style="font-size:0.8rem; color:var(--text-dim);">Match optimal crops based on NPK & soil pH</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="farm-card" style="cursor:pointer;" onclick="window.app?.switchTab('scanner')">
+              <div style="display:flex; align-items:center; gap:16px;">
+                <div class="stat-icon icon-cyan"><i class="fas fa-microscope"></i></div>
+                <div>
+                  <div style="font-weight:700; color:var(--text-primary);">Plant Disease Vision AI</div>
+                  <div style="font-size:0.8rem; color:var(--text-dim);">Diagnose leaf pathology with remedial protocols</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="farm-card" style="cursor:pointer;" onclick="window.app?.switchTab('chat')">
+              <div style="display:flex; align-items:center; gap:16px;">
+                <div class="stat-icon icon-amber"><i class="fas fa-robot"></i></div>
+                <div>
+                  <div style="font-weight:700; color:var(--text-primary);">AI Agronomist Chat</div>
+                  <div style="font-size:0.8rem; color:var(--text-dim);">Instant farming advisory & voice assistance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==========================================
+             TAB 2: CROP AI RECOMMENDATION ENGINE
+             ========================================== -->
+        <div id="tab-cropai" class="tab-pane">
+          <div class="grid-2-1">
+            
+            <!-- Left Input Configuration -->
+            <div class="farm-card">
+              <div class="farm-card-header">
+                <div>
+                  <div class="card-title"><i class="fas fa-sliders"></i> Soil & Climate Parameters</div>
+                  <div class="card-subtitle">Calibrate farm characteristics or select a preset field profile</div>
+                </div>
+              </div>
+
+              <!-- Quick Presets -->
+              <div class="preset-chip-container">
+                <span style="font-size:0.8rem; font-weight:700; color:var(--text-muted); align-self:center;">Presets:</span>
+                <button type="button" class="preset-chip" data-preset="rice"><i class="fas fa-bowl-rice"></i> Paddy Wetland</button>
+                <button type="button" class="preset-chip" data-preset="wheat"><i class="fas fa-wheat-awn"></i> Loamy Wheat</button>
+                <button type="button" class="preset-chip" data-preset="cotton"><i class="fas fa-vest-patches"></i> Black Cotton</button>
+                <button type="button" class="preset-chip" data-preset="tomato"><i class="fas fa-apple-whole"></i> Tomato Greenhouse</button>
+                <button type="button" class="preset-chip" data-preset="groundnut"><i class="fas fa-seedling"></i> Groundnut Sand</button>
+              </div>
+
+              <form id="cropAIForm">
+                <div class="grid-3" style="gap:14px;">
+                  <div class="form-group">
+                    <div class="form-label">
+                      <span>Nitrogen (N)</span>
+                      <span id="valN" class="form-label-val">80</span>
+                    </div>
+                    <input type="range" id="inputN" class="form-range" min="0" max="200" value="80" />
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-label">
+                      <span>Phosphorus (P)</span>
+                      <span id="valP" class="form-label-val">40</span>
+                    </div>
+                    <input type="range" id="inputP" class="form-range" min="0" max="140" value="40" />
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-label">
+                      <span>Potassium (K)</span>
+                      <span id="valK" class="form-label-val">40</span>
+                    </div>
+                    <input type="range" id="inputK" class="form-range" min="0" max="250" value="40" />
+                  </div>
+                </div>
+
+                <div class="grid-2" style="gap:16px; margin-top:8px;">
+                  <div class="form-group">
+                    <div class="form-label">
+                      <span>Soil pH Level</span>
+                      <span id="valPH" class="form-label-val">6.5</span>
+                    </div>
+                    <input type="range" id="inputPH" class="form-range" min="4.0" max="9.0" step="0.1" value="6.5" />
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-label">
+                      <span>Temperature (°C)</span>
+                      <span id="valTemp" class="form-label-val">25</span>
+                    </div>
+                    <input type="range" id="inputTemp" class="form-range" min="5" max="45" value="25" />
+                  </div>
+                </div>
+
+                <div class="grid-2" style="gap:16px; margin-top:8px;">
+                  <div class="form-group">
+                    <div class="form-label">
+                      <span>Relative Humidity (%)</span>
+                      <span id="valHum" class="form-label-val">65</span>
+                    </div>
+                    <input type="range" id="inputHum" class="form-range" min="20" max="100" value="65" />
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-label">
+                      <span>Annual Rainfall (mm)</span>
+                      <span id="valRain" class="form-label-val">800</span>
+                    </div>
+                    <input type="range" id="inputRain" class="form-range" min="200" max="3000" step="50" value="800" />
+                  </div>
+                </div>
+
+                <div style="margin-top:16px; display:flex; justify-content:flex-end;">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-wand-magic-sparkles"></i> Predict Optimal Crops
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right Recommendation Output -->
+            <div>
+              <!-- Hero Winner Card -->
+              <div class="crop-result-hero">
+                <span class="crop-result-badge"><i class="fas fa-crown"></i> Top Recommendation</span>
+                <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); font-weight:700;">AI Optimal Crop Match</div>
+                <h2 id="topCropName" style="color:var(--text-primary); margin:6px 0 10px; font-size:1.8rem;">Rice (Paddy)</h2>
+                
+                <p id="topCropDesc" style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px;">
+                  Staple cereal crop demanding high moisture, fertile alluvial or clayey soil, and warm tropical climate.
+                </p>
+
+                <div class="grid-3" style="gap:10px; background:rgba(0,0,0,0.25); border-radius:var(--radius-md); padding:12px; margin-bottom:14px;">
+                  <div>
+                    <div style="font-size:0.75rem; color:var(--text-dim);">Suitability Score</div>
+                    <div id="topCropScore" style="font-size:1.3rem; font-weight:800; color:var(--accent-emerald-light); font-family:var(--font-mono);">96%</div>
+                  </div>
+                  <div>
+                    <div style="font-size:0.75rem; color:var(--text-dim);">Expected Yield</div>
+                    <div id="topCropYield" style="font-size:0.92rem; font-weight:700; color:var(--text-primary);">5.5 t/ha</div>
+                  </div>
+                  <div>
+                    <div style="font-size:0.75rem; color:var(--text-dim);">Market Price</div>
+                    <div id="topCropPrice" style="font-size:0.92rem; font-weight:700; color:var(--accent-amber);">₹2,300 / Q</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-secondary);">
+                  <span><i class="fas fa-droplet" style="color:var(--accent-cyan);"></i> Water: <strong id="topCropWater">High</strong></span>
+                  <span><i class="fas fa-calendar" style="color:var(--accent-lime);"></i> Season: <strong id="topCropSeason">Kharif</strong></span>
+                </div>
+              </div>
+
+              <!-- Secondary Matches Grid -->
+              <div class="farm-card" style="padding:18px;">
+                <div style="font-weight:700; font-size:0.95rem; color:var(--text-primary); margin-bottom:12px;">Alternative High-Yield Matches</div>
+                <div id="top3CropsGrid" class="crop-card-grid" style="grid-template-columns:1fr; gap:10px;">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 3: PLANT DISEASE VISION AI SCANNER
+             ========================================== -->
+        <div id="tab-scanner" class="tab-pane">
+          <div class="grid-2">
+            
+            <!-- Left Upload / Camera Viewport -->
+            <div class="farm-card">
+              <div class="farm-card-header">
+                <div>
+                  <div class="card-title"><i class="fas fa-camera"></i> Leaf Visual Scanner</div>
+                  <div class="card-subtitle">Upload leaf photograph or select curated pathological specimens</div>
+                </div>
+              </div>
+
+              <div id="scannerViewport" class="scanner-viewport">
+                <img id="scannerPreviewImg" class="scanner-preview-img" src="https://images.unsplash.com/photo-1592417817098-8f3d6910985c?w=600&auto=format&fit=crop&q=80" alt="Leaf Preview" />
+                <div class="scan-laser-line"></div>
+                <div id="scanBoundingBox" class="bounding-box"></div>
+              </div>
+
+              <div id="leafDropzone" class="dropzone-area" style="margin-top:16px;">
+                <i class="fas fa-cloud-arrow-up dropzone-icon"></i>
+                <div style="font-weight:700; color:var(--text-primary); font-size:1rem;">Click or Drag & Drop Leaf Image</div>
+                <div style="font-size:0.8rem; color:var(--text-dim); margin-top:4px;">Supports JPG, PNG, WEBP (High-resolution leaf closeup recommended)</div>
+                <input type="file" id="leafFileInput" accept="image/*" style="display:none;" />
+              </div>
+
+              <!-- Sample Presets -->
+              <div style="margin-top:16px;">
+                <div style="font-size:0.8rem; font-weight:700; color:var(--text-dim); margin-bottom:8px;">Or Test with Benchmark Pathological Samples:</div>
+                <div class="sample-leaf-grid">
+                  <button type="button" class="sample-leaf-btn" data-sample="tomato_early_blight">
+                    <i class="fas fa-circle-dot" style="color:var(--accent-amber);"></i> Early Blight
+                  </button>
+                  <button type="button" class="sample-leaf-btn" data-sample="tomato_late_blight">
+                    <i class="fas fa-circle-dot" style="color:var(--accent-red);"></i> Late Blight
+                  </button>
+                  <button type="button" class="sample-leaf-btn" data-sample="rice_blast">
+                    <i class="fas fa-circle-dot" style="color:var(--accent-amber);"></i> Rice Blast
+                  </button>
+                  <button type="button" class="sample-leaf-btn" data-sample="healthy_leaf">
+                    <i class="fas fa-circle-dot" style="color:var(--accent-emerald);"></i> Healthy Leaf
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Diagnostic Report -->
+            <div>
+              <div class="farm-card">
+                <div class="farm-card-header">
+                  <div>
+                    <div class="card-title"><i class="fas fa-notes-medical"></i> Pathological Diagnostic Report</div>
+                    <div class="card-subtitle">AI computer vision disease identification and treatment protocol</div>
+                  </div>
+                </div>
+
+                <div id="diseaseResultContainer">
+                  <div style="text-align:center; padding:48px 20px; color:var(--text-dim);">
+                    <i class="fas fa-microscope" style="font-size:3rem; color:var(--glass-border-hover); margin-bottom:14px;"></i>
+                    <div>Upload an image or select a sample leaf on the left to generate instant pathological diagnosis.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 4: IOT SENSORS & IRRIGATION AUTOMATION
+             ========================================== -->
+        <div id="tab-iot" class="tab-pane">
+          <div class="grid-4" style="margin-bottom:24px;">
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-emerald"><i class="fas fa-seedling"></i></div>
+              </div>
+              <div class="stat-value"><span id="sensorSoilTempVal">23.4</span><span class="stat-unit">°C</span></div>
+              <div class="stat-label">Soil Temperature (15cm depth)</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-lime"><i class="fas fa-vial"></i></div>
+              </div>
+              <div class="stat-value"><span id="sensorSoilPHVal">6.6</span><span class="stat-unit">pH</span></div>
+              <div class="stat-label">Soil Hydrogen Ion Concentration</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-cyan"><i class="fas fa-faucet-drip"></i></div>
+              </div>
+              <div class="stat-value"><span>35</span><span class="stat-unit">%</span></div>
+              <div class="stat-label">Auto-Irrigation Threshold</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <div class="stat-icon icon-amber"><i class="fas fa-battery-three-quarters"></i></div>
+              </div>
+              <div class="stat-value"><span>94</span><span class="stat-unit">%</span></div>
+              <div class="stat-label">Sensor Node Solar Battery</div>
+            </div>
+          </div>
+
+          <div class="farm-card">
+            <div class="farm-card-header">
+              <div>
+                <div class="card-title"><i class="fas fa-chart-area"></i> Soil Moisture Dynamics & Evaporation Curve</div>
+                <div class="card-subtitle">Real-time IoT telemetry capturing hydration depletion and recharge</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:320px;">
+              <canvas id="iotSoilChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 5: AGRO-WEATHER & ET₀ ADVISORY
+             ========================================== -->
+        <div id="tab-weather" class="tab-pane">
+          <div class="farm-card" style="margin-bottom:24px;">
+            <div class="farm-card-header">
+              <div>
+                <div class="card-title"><i class="fas fa-cloud-sun-rain"></i> 7-Day Precision Agro-Meteorological Forecast</div>
+                <div class="card-subtitle">Microclimate predictions and safe chemical spraying windows</div>
+              </div>
+            </div>
+
+            <div id="weatherWeekGrid" class="weather-week-grid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="farm-card">
+              <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-shield-virus"></i> Foliar Spray Window Advisory</div>
+              <div id="weatherSprayAdvice" style="font-size:0.92rem; color:var(--text-secondary); line-height:1.6;">
+                Analyzing wind speed and rain probability...
+              </div>
+            </div>
+
+            <div class="farm-card">
+              <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-gauge-high"></i> Reference Evapotranspiration (ET₀)</div>
+              <div style="font-size:1.8rem; font-weight:800; color:var(--accent-emerald-light); font-family:var(--font-mono);" id="weatherTodayET">
+                4.2 mm/day
+              </div>
+              <div style="font-size:0.82rem; color:var(--text-dim); margin-top:6px;">
+                Daily water loss via soil evaporation and crop transpiration. Adjust drip volume accordingly.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 6: SOIL HEALTH & FERTILIZER CALCULATOR
+             ========================================== -->
+        <div id="tab-fertilizer" class="tab-pane">
+          <div class="grid-2-1">
+            <div class="farm-card">
+              <div class="farm-card-header">
+                <div>
+                  <div class="card-title"><i class="fas fa-calculator"></i> Fertilizer Dosage Estimator</div>
+                  <div class="card-subtitle">Calculate exact commercial fertilizer requirements (Urea, DAP, MOP)</div>
+                </div>
+              </div>
+
+              <div class="grid-3" style="gap:12px;">
+                <div class="form-group">
+                  <label class="form-label">Target N (kg/ha)</label>
+                  <input type="number" id="fertTargetN" class="form-input" value="100" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Target P (kg/ha)</label>
+                  <input type="number" id="fertTargetP" class="form-input" value="50" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Target K (kg/ha)</label>
+                  <input type="number" id="fertTargetK" class="form-input" value="40" />
+                </div>
+              </div>
+
+              <div class="grid-3" style="gap:12px;">
+                <div class="form-group">
+                  <label class="form-label">Current N (Soil Test)</label>
+                  <input type="number" id="fertCurrentN" class="form-input" value="45" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Current P (Soil Test)</label>
+                  <input type="number" id="fertCurrentP" class="form-input" value="20" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Current K (Soil Test)</label>
+                  <input type="number" id="fertCurrentK" class="form-input" value="25" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Farm Plot Size (Hectares)</label>
+                <input type="number" id="fertArea" class="form-input" value="2" min="0.1" step="0.1" />
+              </div>
+
+              <button type="button" id="calcFertilizerBtn" class="btn btn-primary" style="width:100%; margin-top:8px;">
+                <i class="fas fa-calculator"></i> Calculate Dosage & Bags
+              </button>
+            </div>
+
+            <!-- Output Display -->
+            <div class="farm-card">
+              <div class="card-title" style="margin-bottom:16px;"><i class="fas fa-boxes-stacked"></i> Required Fertilizer Quantities</div>
+
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div style="background:var(--bg-tertiary); border-radius:var(--radius-md); padding:14px; border:1px solid var(--glass-border);">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                      <div style="font-weight:700; color:var(--text-primary);">Urea (46% N)</div>
+                      <div id="resUreaBags" style="font-size:0.75rem; color:var(--text-dim);">(1.8 bags)</div>
+                    </div>
+                    <div id="resUreaKg" style="font-size:1.3rem; font-weight:800; color:var(--accent-emerald-light); font-family:var(--font-mono);">88 kg</div>
+                  </div>
+                </div>
+
+                <div style="background:var(--bg-tertiary); border-radius:var(--radius-md); padding:14px; border:1px solid var(--glass-border);">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                      <div style="font-weight:700; color:var(--text-primary);">DAP (18-46-0)</div>
+                      <div id="resDapBags" style="font-size:0.75rem; color:var(--text-dim);">(2.6 bags)</div>
+                    </div>
+                    <div id="resDapKg" style="font-size:1.3rem; font-weight:800; color:var(--accent-cyan); font-family:var(--font-mono);">130 kg</div>
+                  </div>
+                </div>
+
+                <div style="background:var(--bg-tertiary); border-radius:var(--radius-md); padding:14px; border:1px solid var(--glass-border);">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                      <div style="font-weight:700; color:var(--text-primary);">MOP (60% K₂O)</div>
+                      <div id="resMopBags" style="font-size:0.75rem; color:var(--text-dim);">(1.0 bag)</div>
+                    </div>
+                    <div id="resMopKg" style="font-size:1.3rem; font-weight:800; color:var(--accent-amber); font-family:var(--font-mono);">50 kg</div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="fertAdviceText" style="margin-top:16px; font-size:0.84rem; color:var(--text-secondary); background:rgba(16, 185, 129, 0.08); padding:12px; border-radius:var(--radius-md); border:1px dashed var(--accent-emerald);">
+                Apply DAP and MOP as basal dressing during sowing. Split Urea into 2 top-dressings at tillering and panicle initiation.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 7: MANDI MARKET PRICES & PROFIT PLANNER
+             ========================================== -->
+        <div id="tab-market" class="tab-pane">
+          <div class="grid-2">
+            <div class="farm-card">
+              <div class="farm-card-header">
+                <div>
+                  <div class="card-title"><i class="fas fa-coins"></i> Crop Profit & ROI Estimator</div>
+                  <div class="card-subtitle">Calculate projected revenue, operational costs, and net return</div>
+                </div>
+              </div>
+
+              <div class="grid-2" style="gap:14px;">
+                <div class="form-group">
+                  <label class="form-label">Expected Yield (Tons / Ha)</label>
+                  <input type="number" id="mktYield" class="form-input" value="5.5" step="0.5" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mandi Price (₹ / Quintal)</label>
+                  <input type="number" id="mktPrice" class="form-input" value="2300" step="50" />
+                </div>
+              </div>
+
+              <div class="grid-2" style="gap:14px;">
+                <div class="form-group">
+                  <label class="form-label">Cultivation Cost (₹ / Ha)</label>
+                  <input type="number" id="mktCost" class="form-input" value="38000" step="1000" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Total Land Area (Hectares)</label>
+                  <input type="number" id="mktArea" class="form-input" value="2" step="0.5" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Financial Projections Card -->
+            <div class="farm-card">
+              <div class="card-title" style="margin-bottom:16px;"><i class="fas fa-sack-dollar"></i> Projected Financial Summary</div>
+
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div style="background:var(--bg-tertiary); border-radius:var(--radius-md); padding:14px; border:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center;">
+                  <span style="color:var(--text-dim);">Gross Market Revenue</span>
+                  <span id="mktGrossRev" style="font-size:1.3rem; font-weight:800; color:var(--text-primary); font-family:var(--font-mono);">₹2,53,000</span>
+                </div>
+
+                <div style="background:var(--bg-tertiary); border-radius:var(--radius-md); padding:14px; border:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center;">
+                  <span style="color:var(--text-dim);">Estimated Net Profit</span>
+                  <span id="mktNetProfit" style="font-size:1.5rem; font-weight:800; color:var(--accent-emerald-light); font-family:var(--font-mono);">₹1,77,000</span>
+                </div>
+
+                <div style="background:var(--bg-tertiary); border-radius:var(--radius-md); padding:14px; border:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center;">
+                  <span style="color:var(--text-dim);">Return on Investment (ROI)</span>
+                  <span id="mktROI" style="font-size:1.3rem; font-weight:800; color:var(--accent-lime); font-family:var(--font-mono);">232.9%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 8: AKSHI AI VIRTUAL AGRONOMIST
+             ========================================== -->
+        <div id="tab-chat" class="tab-pane">
+          <div class="chat-container">
+            <div class="chat-header">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="brand-icon" style="width:36px; height:36px; font-size:1rem;">
+                  <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                  <div style="font-weight:700; font-size:1rem; color:var(--text-primary);">Akshi AI Virtual Agronomist</div>
+                  <div style="font-size:0.72rem; color:var(--accent-emerald-light);"><i class="fas fa-circle-dot" style="font-size:0.6rem;"></i> 24/7 Expert Agronomy Reasoning</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Messages Log -->
+            <div id="chatMessagesContainer" class="chat-messages">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Quick Suggestions Bar -->
+            <div class="quick-prompts-bar">
+              <button type="button" class="preset-chip quick-prompt-chip" data-prompt="How to cure Early Blight on Tomato?">
+                <i class="fas fa-leaf"></i> Cure Tomato Early Blight
+              </button>
+              <button type="button" class="preset-chip quick-prompt-chip" data-prompt="What is the best fertilizer dosing for Rice?">
+                <i class="fas fa-flask"></i> Rice Fertilizer Schedule
+              </button>
+              <button type="button" class="preset-chip quick-prompt-chip" data-prompt="Why are my plant leaves turning yellow?">
+                <i class="fas fa-circle-question"></i> Yellowing Leaves Cause
+              </button>
+              <button type="button" class="preset-chip quick-prompt-chip" data-prompt="What government subsidies exist for Drip Irrigation?">
+                <i class="fas fa-landmark"></i> Drip Irrigation Subsidy
+              </button>
+            </div>
+
+            <!-- Input Bar -->
+            <form id="chatForm" class="chat-input-bar">
+              <input type="text" id="chatUserInput" class="chat-input" placeholder="Ask Akshi anything about crops, pests, fertilizers, irrigation..." autocomplete="off" />
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Send
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/ml_engine.js"></script>
+  <script src="js/iot_simulator.js"></script>
+  <script src="js/weather_advisor.js"></script>
+  <script src="js/chat_assistant.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
